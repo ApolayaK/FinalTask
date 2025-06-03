@@ -32,7 +32,13 @@ CREATE TABLE mascotas (
 INSERT INTO propietarios (apellidos, nombres, dni, telefono, direccion) VALUES
 ('Perez', 'Juan', '12345678', '987654321', 'Av. Perú 123'),
 ('Gomez', 'Ana', '87654321', '912345678', 'Jr. Lima 456'),
-('Torres', 'Luis', '45671234', '931234567', 'Calle Sol 789');
+('Torres', 'Luis', '45671234', '931234567', 'Calle Sol 789'),
+('Ramirez', 'Carla', '12398745', '987321654', 'Av. Los Álamos 555'),
+('Fernandez', 'Mario', '78945612', '989898989', 'Calle Robles 321'),
+('Salazar', 'Lucía', '45678912', '934567890', 'Jr. Amazonas 741'),
+('Cabrera', 'Andrés', '65412378', '911122233', 'Av. Central 222'),
+('Vargas', 'Elena', '87651234', '922334455', 'Pasaje Las Flores 909');
+
 
 -- Insertar mascotas
 INSERT INTO mascotas (idpropietario, tipo, nombre, raza, color, genero, fecha_nacimiento) VALUES
@@ -41,7 +47,17 @@ INSERT INTO mascotas (idpropietario, tipo, nombre, raza, color, genero, fecha_na
 (2, 'Perro', 'Rex', 'Pastor Alemán', 'Negro', 'macho', '2019-04-10'),
 (2, 'Gato', 'Luna', 'Persa', 'Gris', 'hembra', '2022-02-12'),
 (3, 'Ave', 'Piolín', 'Canario', 'Amarillo', 'macho', '2023-01-05'),
-(3, 'Conejo', 'Nube', 'Mini Lop', 'Blanco', 'hembra', '2022-09-17');
+(3, 'Conejo', 'Nube', 'Mini Lop', 'Blanco', 'hembra', '2022-09-17'),
+(4, 'Gato', 'Michi', 'Angora', 'Blanco', 'hembra', '2021-11-05'),
+(4, 'Perro', 'Max', 'Golden Retriever', 'Dorado', 'macho', '2020-01-23'),
+(5, 'Conejo', 'Tambor', 'Enano', 'Gris', 'macho', '2022-06-18'),
+(5, 'Ave', 'Coco', 'Loro', 'Verde', 'macho', '2023-03-09'),
+(6, 'Perro', 'Princesa', 'Poodle', 'Blanco', 'hembra', '2018-12-01'),
+(6, 'Gato', 'Sombra', 'Bombay', 'Negro', 'hembra', '2020-09-13'),
+(7, 'Perro', 'Rocky', 'Bulldog', 'Marrón', 'macho', '2019-05-25'),
+(8, 'Ave', 'Chispa', 'Periquito', 'Azul', 'hembra', '2023-04-14'),
+(8, 'Conejo', 'Copito', 'Cabeza de León', 'Blanco', 'macho', '2021-10-30'),
+(8, 'Perro', 'Toby', 'Beagle', 'Tricolor', 'macho', '2017-03-08');
 
 
 
@@ -58,6 +74,7 @@ SELECT
 FROM mascotas M
 INNER JOIN propietarios P ON M.idpropietario = P.idpropietario
 ORDER BY M.nombre;
+
 
 
 DROP DATABASE veterinaria;

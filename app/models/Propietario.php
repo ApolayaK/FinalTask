@@ -36,22 +36,22 @@ class Propietario {
    * Devuelve todos los propietarios
    * @return array
    */
-  public function getAll(): array {
-    $sql = "
-      SELECT 
-        idpropietario,
-        apellidos,
-        nombres,
-        dni,
-        telefono,
-        direccion
-      FROM propietarios
-      ORDER BY apellidos, nombres
-    ";
-    $query = $this->pdo->prepare($sql);
-    $query->execute();
-    return $query->fetchAll(PDO::FETCH_ASSOC);
-  }
+public function getAll(): array {
+  $sql = "
+    SELECT 
+      idpropietario,
+      apellidos,
+      nombres,
+      dni,
+      telefono,
+      direccion
+    FROM propietarios
+    ORDER BY idpropietario ASC
+  ";
+  $query = $this->pdo->prepare($sql);
+  $query->execute();
+  return $query->fetchAll(PDO::FETCH_ASSOC);
+}
 
   /**
    * Actualiza los datos del propietario

@@ -69,14 +69,14 @@
       </thead>
       <tbody>
         <?php foreach ($listaPropietarios as $propietario): ?>
-        <tr>
-          <td><?= $propietario['idpropietario'] ?></td>
-          <td><?= $propietario['apellidos'] ?></td>
-          <td><?= $propietario['nombres'] ?></td>
-          <td><?= $propietario['dni'] ?></td>
-          <td><?= $propietario['telefono'] ?></td>
-          <td><?= $propietario['direccion'] ?></td>
-        </tr>
+            <tr>
+                <td><?= $propietario['idpropietario'] ?></td>
+                <td><?= $propietario['apellidos'] ?></td>
+                <td><?= $propietario['nombres'] ?></td>
+                <td><?= $propietario['dni'] ?></td>
+                <td><?= $propietario['telefono'] ?></td>
+                <td><?= $propietario['direccion'] ?></td>
+            </tr>
         <?php endforeach; ?>
       </tbody>
     </table>

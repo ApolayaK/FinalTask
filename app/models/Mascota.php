@@ -38,12 +38,13 @@ class Mascota {
         CONCAT(PR.apellidos, ' ', PR.nombres) AS propietario
       FROM mascotas MA 
       INNER JOIN propietarios PR ON MA.idpropietario = PR.idpropietario
-      ORDER BY MA.nombre;
+      ORDER BY MA.idmascota ASC;
     ";
     $query = $this->pdo->prepare($sql);
     $query->execute();
     return $query->fetchAll(PDO::FETCH_ASSOC);
   }
+
 
   public function getById(): array {
     return [];
