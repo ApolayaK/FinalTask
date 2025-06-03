@@ -5,26 +5,47 @@
   <title>Reporte de Mascotas</title>
 </head>
 <body>
-  <style>
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    color: #222;
+  }
 
-    thead th {
-      background-color: aquamarine;
-    }
+  h1 {
+    text-align: center;
+    color: #00796b; 
+    margin-bottom: 20px;
+  }
 
-    td, th {
-      border: 2px solid black;
-      padding: 5px;
-      text-align: left;
-    }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
 
-    h1 {
-      text-align: center;
-    }
-  </style>
+  thead th {
+    background-color: #80cbc4; 
+    color: #004d40; 
+    border: 1.5px solid #004d40;
+    padding: 8px 10px;
+    font-weight: bold;
+  }
+
+  tbody td {
+    border: 1.5px solid #004d40;
+    padding: 8px 10px;
+    text-align: left;
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: #e0f2f1; 
+  }
+
+  tbody tr:hover {
+    background-color: #b2dfdb;
+  }
+</style>
+
 
   <h1>REPORTE DE MASCOTAS</h1>
   <div>
