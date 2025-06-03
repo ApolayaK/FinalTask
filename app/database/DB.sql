@@ -1,49 +1,63 @@
 
-create database veterinaria;
-use veterinaria;
+CREATE DATABASE veterinaria;
+USE veterinaria;
 
-create table propietarios (
-  idpropietario int auto_increment primary key,
-  apellidos varchar(40) not null,
-  nombres varchar(40) not null
-)engine=InnoDB;
+-- Tabla de propietarios
+CREATE TABLE propietarios (
+  idpropietario INT AUTO_INCREMENT PRIMARY KEY,
+  apellidos VARCHAR(40) NOT NULL,
+  nombres VARCHAR(40) NOT NULL,
+  dni CHAR(8) NOT NULL,
+  telefono VARCHAR(15),
+  direccion VARCHAR(100)
+) ENGINE=InnoDB;
 
-create table mascotas (
-  idmascota int auto_increment primary key,
-  idpropietario int not null,
-  tipo enum('Perro', 'Gato') not null,
-  nombre varchar(40) not null,
-  color varchar(40) not null,
-  genero enum('macho', 'hembra') not null,
-  vive enum('si', 'no') not null DEFAULT 'si',
-  constraint fk_idpropietario foreign key (idpropietario) references propietarios(idpropietario)
-)engine=InnoDB;
-
-INSERT INTO propietarios (apellidos, nombres) VALUES
-('Perez', 'Juan'),
-('Gomez', 'Ana');
-
-INSERT INTO mascotas (idpropietario, tipo, nombre, color, genero) VALUES
-(1, 'Perro', 'Firulais', 'Marron', 'macho'),
-(1, 'Gato', 'Miau', 'Blanco', 'hembra'),
-(2, 'Perro', 'Rex', 'Negro', 'macho'),
-(2, 'Gato', 'Luna', 'Gris', 'hembra');
+-- Tabla de mascotas
+CREATE TABLE mascotas (
+  idmascota INT AUTO_INCREMENT PRIMARY KEY,
+  idpropietario INT NOT NULL,
+  tipo ENUM('Perro', 'Gato', 'Ave', 'Conejo') NOT NULL,
+  nombre VARCHAR(40) NOT NULL,
+  raza VARCHAR(40),
+  color VARCHAR(40) NOT NULL,
+  genero ENUM('macho', 'hembra') NOT NULL,
+  fecha_nacimiento DATE,
+  vive ENUM('si', 'no') NOT NULL DEFAULT 'si',
+  CONSTRAINT fk_idpropietario FOREIGN KEY (idpropietario) REFERENCES propietarios(idpropietario)
+) ENGINE=InnoDB;
 
 
-UPDATE mascotas set
- idpropietario = 1,
- tipo = 'Gato',
- nombre = 'Matador',
- color = 'Chocolate',
- genero = 'macho'
-WHERE idmascota =2;
--- ELIMINAR
-DROP DATABASE veterinaria;
-SELECT * FROM mascotas;
+
+-- Insertar propietarios
+INSERT INTO propietarios (apellidos, nombres, dni, telefono, direccion) VALUES
+('Perez', 'Juan', '12345678', '987654321', 'Av. Perú 123'),
+('Gomez', 'Ana', '87654321', '912345678', 'Jr. Lima 456'),
+('Torres', 'Luis', '45671234', '931234567', 'Calle Sol 789');
+
+-- Insertar mascotas
+INSERT INTO mascotas (idpropietario, tipo, nombre, raza, color, genero, fecha_nacimiento) VALUES
+(1, 'Perro', 'Firulais', 'Labrador', 'Marrón', 'macho', '2020-06-15'),
+(1, 'Gato', 'Matador', 'Siames', 'Chocolate', 'macho', '2021-08-20'),
+(2, 'Perro', 'Rex', 'Pastor Alemán', 'Negro', 'macho', '2019-04-10'),
+(2, 'Gato', 'Luna', 'Persa', 'Gris', 'hembra', '2022-02-12'),
+(3, 'Ave', 'Piolín', 'Canario', 'Amarillo', 'macho', '2023-01-05'),
+(3, 'Conejo', 'Nube', 'Mini Lop', 'Blanco', 'hembra', '2022-09-17');
+
+
 
 SELECT 
-  MA.idmascota,
-  CONCAT(PR.apellidos,' ', PR.nombres) 'propietario'
-  FROM mascotas MA 
-  INNER JOIN propietarios PR ON ma.idpropietario = PR.idpropietario
-  ORDER BY MA.nombre;
+  M.idmascota,
+  M.nombre AS nombre_mascota,
+  M.tipo,
+  M.raza,
+  M.color,
+  M.genero,
+  M.vive,
+  DATE_FORMAT(M.fecha_nacimiento, '%d/%m/%Y') AS nacimiento,
+  CONCAT(P.apellidos, ' ', P.nombres) AS propietario
+FROM mascotas M
+INNER JOIN propietarios P ON M.idpropietario = P.idpropietario
+ORDER BY M.nombre;
+
+
+DROP DATABASE veterinaria;
