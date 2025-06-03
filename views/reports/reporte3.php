@@ -1,12 +1,15 @@
 <?php
 
 require_once '../../vendor/autoload.php';
+require_once '../../app/models/Mascota.php';
 
 use Spipu\Html2Pdf\Html2Pdf; //Core = nucleo de la libreria 
 use Spipu\Html2Pdf\Exception\Html2PdfException; //Identificacion errores 
 use Spipu\Html2Pdf\Exception\ExceptionFormatter; //Formatear PDF
 
 try {
+  $mascotas = new Mascota();
+  $listaMascotas = $mascotas->getAll();
     ob_start();
     //include_once '../../public/css/estilos-reporte.html'; 
     include_once '../contents/content-reporte3.php'; 

@@ -46,6 +46,9 @@
       </tr>
     </thead>
     <tbody>
+
+      <?php foreach($listaMascotas as $mascotas): ?>
+
       <tr>
         <td>1</td>
         <td>Firulais</td>
@@ -54,22 +57,7 @@
         <td>Macho</td>
         <td>Marco</td>
       </tr>
-      <tr>
-        <td>1</td>
-        <td>Firulais</td>
-        <td>Perro</td>
-        <td>Negro</td>
-        <td>Macho</td>
-        <td>Marco</td>
-      </tr>
-      <tr>
-        <td>1</td>
-        <td>Firulais</td>
-        <td>Perro</td>
-        <td>Negro</td>
-        <td>Macho</td>
-        <td>Marco</td>
-      </tr>
+      <?php endforeach?>
     </tbody>
   </table>
 </div>
