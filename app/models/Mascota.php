@@ -1,15 +1,18 @@
 <?php
 
-require_once '../config/Database.php';
-require_once '../entities/Mascota.entidad.php';
+require_once __DIR__ . '/../config/Database.php';
+require_once __DIR__ . '/../entities/Mascota.entidad.php';
 
 /**
- * Esta clase contiene la logica para interactuar con la BD
+ * Esta clase contiene la lógica para interactuar con la BD
  */
 class Mascota {
 
   private $pdo = null;
-  public function __construct() {$this->pdo = Database::getConexion();}
+
+  public function __construct() {
+    $this->pdo = Database::getConexion();
+  }
 
   public function create(MascotaEntidad $entidad): int {
     $sql = "INSERT INTO mascotas (idpropietario, tipo, nombre, color, genero) VALUES (?, ?, ?, ?, ?)";
@@ -21,31 +24,25 @@ class Mascota {
       $entidad->__GET('color'),
       $entidad->__GET('genero')
     ]);
-    return $this->pdo->lastInsertId(); //Obtenemos el ultimo ID
+    return $this->pdo->lastInsertId(); // Obtenemos el último ID
   }
 
-  public function getAll():array {
+  public function getAll(): array {
     $sql = "
       SELECT 
-      MA.idmascota,
-      CONCAT(PR.apellidos,' ', PR.nombres) 'propietario'
+        MA.idmascota,
+        MA.nombre,
+        MA.tipo,
+        MA.color,
+        MA.genero,
+        CONCAT(PR.apellidos, ' ', PR.nombres) AS propietario
       FROM mascotas MA 
-      INNER JOIN propietarios PR ON ma.idpropietario = PR.idpropietario
+      INNER JOIN propietarios PR ON MA.idpropietario = PR.idpropietario
       ORDER BY MA.nombre;
     ";
     $query = $this->pdo->prepare($sql);
     $query->execute();
-    //FECH_CLASS (Coleccion de Objetos)
-    //FETCH_ASSOC (Coleccion de Arreglos asociativos)
-    //FETCH_OBJ (Coleccion de Objetos)
-    //FETCH_COLUMN (Coleccion de una sola columna)
-    //FETCH_NUM (Coleccion de arreglos indexados)
-    //FETCH_BOTH (Coleccion de arreglos asociativos e indexados)
-    //FETCH_KEY_PAIR (Coleccion de arreglos asociativos con clave y valor)
-    //FETCH_UNIQUE (Coleccion de arreglos asociativos con clave unica)
-    //FETCH_GROUP (Coleccion de arreglos asociativos agrupados por clave)
-    //FETCH_FUNC (Coleccion de arreglos asociativos con una funcion de callback)
-    return $query->fetchAll(PDO::FETCH_COLUMN);  
+    return $query->fetchAll(PDO::FETCH_ASSOC);
   }
 
   public function getById(): array {
@@ -55,12 +52,13 @@ class Mascota {
   public function delete(): int {
     return 0;
   }
+
   /**
    * Actualiza los datos de la mascota
    * @param mixed Arreglo que contiene los campos requeridos
-   * @return int Numero de filas afectadas por la actualizacion
+   * @return int Número de filas afectadas por la actualización
    */
-  public function update($params =[]): int {
+  public function update($params = []): int {
     $sql = "
       UPDATE mascotas SET 
         idpropietario = ?, 
@@ -80,10 +78,7 @@ class Mascota {
       $params['genero'],
       $params['idmascota']
     ]);
-    
-    return $query->rowCount(); //Retorna la cantidad de filas afectadas
+
+    return $query->rowCount();
   }
 }
-
-
-
